@@ -243,13 +243,13 @@ typedef struct EB_H265_ENC_CONFIGURATION
      * Default is 60. */
     uint32_t                frameRate;
 
-    /* Frame rate numerator. When zero, the encoder will use –fps if
+    /* Frame rate numerator. When zero, the encoder will use -fps if
      * FrameRateDenominator is also zero, otherwise an error is returned.
      *
      * Default is 0. */
     int32_t                 frameRateNumerator;
 
-    /* Frame rate denominator. When zero, the encoder will use –fps if
+    /* Frame rate denominator. When zero, the encoder will use -fps if
      * FrameRateNumerator is also zero, otherwise an error is returned.
      *
      * Default is 0. */
@@ -442,11 +442,35 @@ typedef struct EB_H265_ENC_CONFIGURATION
      * Default is 0. */
     uint32_t                videoUsabilityInfo;
 
-    /* Flag to signal that the input yuv is HDR BT2020 using SMPTE ST2048, requires
+    /* Flag to signal that the input yuv is HDR BT2020 using SMPTE ST2084, requires
      * VideoUsabilityInfo to be set to 1. Only applicable for 10bit input.
      *
      * Default is 0. */
     uint32_t                highDynamicRangeInput;
+
+    /* Value of colour_primaries in the VUI.
+     * Only applicable when highDynamicRangeInput is set to 1.
+     *
+     *  9 = BT2020.
+     *
+     * Default is 9. */
+    uint32_t                colorPrimaries;
+
+    /* Value of transfer_characteristics in the VUI.
+     * Only applicable when highDynamicRangeInput is set to 1.
+     *
+     * 16 = SMPTE ST2084.
+     *
+     * Default is 16. */
+    uint32_t                transferCharacteristics;
+
+    /* Value of matrix_coeffs in the VUI.
+     * Only applicable when highDynamicRangeInput is set to 1.
+     *
+     *  9 = BT2020.
+     *
+     * Default is 9. */
+    uint32_t                matrixCoeffs;
 
     /* Flag to simplify the detection of boundary between access units.
      * 

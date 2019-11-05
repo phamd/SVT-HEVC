@@ -3290,6 +3290,9 @@ EB_ERRORTYPE EbH265EncInitParameter(
 
     configPtr->videoUsabilityInfo = 0;
     configPtr->highDynamicRangeInput = 0;
+    configPtr->colorPrimaries = 9;
+    configPtr->transferCharacteristics = 16;
+    configPtr->matrixCoeffs = 9;
     configPtr->accessUnitDelimiter = 0;
     configPtr->bufferingPeriodSEI = 0;
     configPtr->pictureTimingSEI = 0;

@@ -423,9 +423,9 @@ void* ResourceCoordinationKernel(void *inputPtr)
                     vuiPtr->videoFullRangeFlag = EB_FALSE;
 
                     vuiPtr->colorDescriptionPresentFlag = EB_TRUE;
-                    vuiPtr->colorPrimaries = 9;   // BT2020
-                    vuiPtr->transferCharacteristics = 16;  // SMPTE ST2048
-                    vuiPtr->matrixCoeffs = 9;
+                    vuiPtr->colorPrimaries = sequenceControlSetPtr->staticConfig.colorPrimaries;
+                    vuiPtr->transferCharacteristics = sequenceControlSetPtr->staticConfig.transferCharacteristics;
+                    vuiPtr->matrixCoeffs = sequenceControlSetPtr->staticConfig.matrixCoeffs;
 
                     vuiPtr->chromaLocInfoPresentFlag = EB_TRUE;
                     vuiPtr->chromaSampleLocTypeTopField = 2;

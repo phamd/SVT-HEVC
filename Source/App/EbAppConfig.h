@@ -338,6 +338,9 @@ typedef struct EbConfig_s
     EB_BOOL                improveSharpness;
     uint32_t                 videoUsabilityInfo;
     uint32_t                 highDynamicRangeInput;
+    uint32_t                 colorPrimaries;
+    uint32_t                 transferCharacteristics;
+    uint32_t                 matrixCoeffs;
     uint32_t                 accessUnitDelimiter;
     uint32_t                 bufferingPeriodSEI;
     uint32_t                 pictureTimingSEI;

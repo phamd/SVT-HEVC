@@ -224,6 +224,9 @@ EB_ERRORTYPE CopyConfigurationParameters(
     callbackData->ebEncParameters.improveSharpness = (uint8_t)config->improveSharpness;
     callbackData->ebEncParameters.videoUsabilityInfo = config->videoUsabilityInfo;
     callbackData->ebEncParameters.highDynamicRangeInput = config->highDynamicRangeInput;
+    callbackData->ebEncParameters.colorPrimaries = config->colorPrimaries;
+    callbackData->ebEncParameters.transferCharacteristics = config->transferCharacteristics;
+    callbackData->ebEncParameters.matrixCoeffs = config->matrixCoeffs;
     callbackData->ebEncParameters.accessUnitDelimiter = config->accessUnitDelimiter;
     callbackData->ebEncParameters.bufferingPeriodSEI = config->bufferingPeriodSEI;
     callbackData->ebEncParameters.pictureTimingSEI = config->pictureTimingSEI;
