@@ -63,7 +63,7 @@ extern    EB_U64                  *totalLibMemory;          // library Memory ma
 extern    GROUP_AFFINITY           groupAffinity;
 extern    EB_U8                    numGroups;
 extern    EB_BOOL                  alternateGroups;
-#define EB_CREATETHREAD(type, pointer, nElements, pointerClass, threadFunction, threadContext) \
+#define EB_CREATETHREAD(type, pointer, nElements, pointerClass, threadFunction, threadContext, threadName) \
     pointer = EbCreateThread(threadFunction, threadContext); \
     if (pointer == (type)EB_NULL) { \
         return EB_ErrorInsufficientResources; \
@@ -100,7 +100,7 @@ extern    EB_BOOL                  alternateGroups;
 #include <sched.h>
 #include <pthread.h>
 extern    cpu_set_t                   groupAffinity;
-#define EB_CREATETHREAD(type, pointer, nElements, pointerClass, threadFunction, threadContext) \
+#define EB_CREATETHREAD(type, pointer, nElements, pointerClass, threadFunction, threadContext, threadName) \
     pointer = EbCreateThread(threadFunction, threadContext); \
     if (pointer == (type)EB_NULL) { \
         return EB_ErrorInsufficientResources; \
@@ -119,9 +119,12 @@ extern    cpu_set_t                   groupAffinity;
     if (*(memoryMapIndex) >= MAX_NUM_PTR) { \
         return EB_ErrorInsufficientResources; \
     } \
+    if (threadName) { \
+        pthread_setname_np(*(pthread_t*)pointer, threadName); \
+    } \
     libThreadCount++;
 #else
-#define EB_CREATETHREAD(type, pointer, nElements, pointerClass, threadFunction, threadContext) \
+#define EB_CREATETHREAD(type, pointer, nElements, pointerClass, threadFunction, threadContext, threadName) \
     pointer = EbCreateThread(threadFunction, threadContext); \
     if (pointer == (type)EB_NULL) { \
         return EB_ErrorInsufficientResources; \

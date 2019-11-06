@@ -1853,64 +1853,64 @@ EB_API EB_ERRORTYPE EbInitEncoder(EB_COMPONENTTYPE *h265EncComponent)
     EbSetThreadManagementParameters(configPtr);
 
     // Resource Coordination
-    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->resourceCoordinationThreadHandle, sizeof(EB_HANDLE), EB_THREAD, ResourceCoordinationKernel, encHandlePtr->resourceCoordinationContextPtr);
+    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->resourceCoordinationThreadHandle, sizeof(EB_HANDLE), EB_THREAD, ResourceCoordinationKernel, encHandlePtr->resourceCoordinationContextPtr, "ResourceCoordin");
 
     // Picture Analysis
     EB_MALLOC(EB_HANDLE*, encHandlePtr->pictureAnalysisThreadHandleArray, sizeof(EB_HANDLE) * encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->pictureAnalysisProcessInitCount, EB_N_PTR);
 
     for(processIndex=0; processIndex < encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->pictureAnalysisProcessInitCount; ++processIndex) {
-        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->pictureAnalysisThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, PictureAnalysisKernel, encHandlePtr->pictureAnalysisContextPtrArray[processIndex]);
+        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->pictureAnalysisThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, PictureAnalysisKernel, encHandlePtr->pictureAnalysisContextPtrArray[processIndex], "PictureAnalysis");
     }
 
     // Picture Decision
-    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->pictureDecisionThreadHandle, sizeof(EB_HANDLE), EB_THREAD, PictureDecisionKernel, encHandlePtr->pictureDecisionContextPtr);
+    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->pictureDecisionThreadHandle, sizeof(EB_HANDLE), EB_THREAD, PictureDecisionKernel, encHandlePtr->pictureDecisionContextPtr, "PictureDecision");
 
     // Motion Estimation
     EB_MALLOC(EB_HANDLE*, encHandlePtr->motionEstimationThreadHandleArray, sizeof(EB_HANDLE) * encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->motionEstimationProcessInitCount, EB_N_PTR);
 
     for(processIndex=0; processIndex < encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->motionEstimationProcessInitCount; ++processIndex) {
-        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->motionEstimationThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, MotionEstimationKernel, encHandlePtr->motionEstimationContextPtrArray[processIndex]);
+        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->motionEstimationThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, MotionEstimationKernel, encHandlePtr->motionEstimationContextPtrArray[processIndex], "MotionEstimatio");
     }
 
     // Initial Rate Control
-    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->initialRateControlThreadHandle, sizeof(EB_HANDLE), EB_THREAD, InitialRateControlKernel, encHandlePtr->initialRateControlContextPtr);
+    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->initialRateControlThreadHandle, sizeof(EB_HANDLE), EB_THREAD, InitialRateControlKernel, encHandlePtr->initialRateControlContextPtr, "InitialRateCtrl");
 
 	// Source Based Oprations
     EB_MALLOC(EB_HANDLE*, encHandlePtr->sourceBasedOperationsThreadHandleArray, sizeof(EB_HANDLE) * encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->sourceBasedOperationsProcessInitCount, EB_N_PTR);
 
     for (processIndex = 0; processIndex < encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->sourceBasedOperationsProcessInitCount; ++processIndex) {
-	    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->sourceBasedOperationsThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, SourceBasedOperationsKernel, encHandlePtr->sourceBasedOperationsContextPtrArray[processIndex]);
+	    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->sourceBasedOperationsThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, SourceBasedOperationsKernel, encHandlePtr->sourceBasedOperationsContextPtrArray[processIndex], "SourceBasedOps");
     }
 
     // Picture Manager
-    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->pictureManagerThreadHandle, sizeof(EB_HANDLE), EB_THREAD, PictureManagerKernel, encHandlePtr->pictureManagerContextPtr);
+    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->pictureManagerThreadHandle, sizeof(EB_HANDLE), EB_THREAD, PictureManagerKernel, encHandlePtr->pictureManagerContextPtr, "PictureManager");
 
     // Rate Control
-    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->rateControlThreadHandle, sizeof(EB_HANDLE), EB_THREAD, RateControlKernel, encHandlePtr->rateControlContextPtr);
+    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->rateControlThreadHandle, sizeof(EB_HANDLE), EB_THREAD, RateControlKernel, encHandlePtr->rateControlContextPtr, "RateControl");
 
     // Mode Decision Configuration Process
     EB_MALLOC(EB_HANDLE*, encHandlePtr->modeDecisionConfigurationThreadHandleArray, sizeof(EB_HANDLE) * encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->modeDecisionConfigurationProcessInitCount, EB_N_PTR);
 
     for(processIndex=0; processIndex < encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->modeDecisionConfigurationProcessInitCount; ++processIndex) {
-        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->modeDecisionConfigurationThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, ModeDecisionConfigurationKernel, encHandlePtr->modeDecisionConfigurationContextPtrArray[processIndex]);
+        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->modeDecisionConfigurationThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, ModeDecisionConfigurationKernel, encHandlePtr->modeDecisionConfigurationContextPtrArray[processIndex], "ModeDecisionCfg");
     }
 
     // EncDec Process
     EB_MALLOC(EB_HANDLE*, encHandlePtr->encDecThreadHandleArray, sizeof(EB_HANDLE) * encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->encDecProcessInitCount, EB_N_PTR);
 
     for(processIndex=0; processIndex < encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->encDecProcessInitCount; ++processIndex) {
-        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->encDecThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, EncDecKernel, encHandlePtr->encDecContextPtrArray[processIndex]);
+        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->encDecThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, EncDecKernel, encHandlePtr->encDecContextPtrArray[processIndex], "EncDec");
     }
 
     // Entropy Coding Process
     EB_MALLOC(EB_HANDLE*, encHandlePtr->entropyCodingThreadHandleArray, sizeof(EB_HANDLE) * encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->entropyCodingProcessInitCount, EB_N_PTR);
 
     for(processIndex=0; processIndex < encHandlePtr->sequenceControlSetInstanceArray[0]->sequenceControlSetPtr->entropyCodingProcessInitCount; ++processIndex) {
-        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->entropyCodingThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, EntropyCodingKernel, encHandlePtr->entropyCodingContextPtrArray[processIndex]);
+        EB_CREATETHREAD(EB_HANDLE, encHandlePtr->entropyCodingThreadHandleArray[processIndex], sizeof(EB_HANDLE), EB_THREAD, EntropyCodingKernel, encHandlePtr->entropyCodingContextPtrArray[processIndex], "EntropyCoding");
     }
 
     // Packetization
-    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->packetizationThreadHandle, sizeof(EB_HANDLE), EB_THREAD, PacketizationKernel, encHandlePtr->packetizationContextPtr);
+    EB_CREATETHREAD(EB_HANDLE, encHandlePtr->packetizationThreadHandle, sizeof(EB_HANDLE), EB_THREAD, PacketizationKernel, encHandlePtr->packetizationContextPtr, "Packetization");
 
 #if DISPLAY_MEMORY
     EB_MEMORY();
